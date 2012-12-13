@@ -1,0 +1,49 @@
+
+<div class="btn-group btn-group-vertical toolbox-right">
+  <button class="btn btn-inverse" ng-class="enableClass('DOC')" title="Document" ng-click="toggle('DOC')"><i class="icon-white icon-play"></i></button>
+  <button class="btn btn-inverse" ng-class="enableClass('EDIT')" title="Editor" ng-click="toggle('EDIT')"><i class="icon-white icon-pencil"></i></button>
+  <button class="btn btn-inverse" ng-class="enableClass('STYLE')" title="Styler" ng-click="toggle('STYLE')"><i class="icon-white icon-adjust"></i></button>
+  <button class="btn btn-inverse" ng-class="enableClass('MODEL')" title="Model" ng-click="toggle('MODEL')"><i class="icon-white icon-align-justify"></i></button>
+  <button class="btn btn-inverse" ng-class="enableClass('DEBUG')" title="Debuger" ng-click="toggle('DEBUG')"><i class="icon-white icon-pause"></i></button>
+</div>
+        
+</div>
+
+<div ng-show="components.DOC">
+<marabu-doc-view class="grid-cell" style="min-width: 46%; min-width: 46%; padding: 4px" document="doc"></marabu-doc-view>
+</div> 
+
+<div ng-show="components.EDIT" class="grid-cell" style="min-width: 46%; padding: 4px">    
+    <div><textarea ui-codemirror='{ lineNumbers : true, mode : "xml", theme : "earth", matchBrackets : true, lineWrapping : true }' ng-model="doc.text"></textarea></div>
+    <div class="alert alert-error" ng-show="doc.textError">
+    <small>{{doc.textError.toString()}}</small>
+    </div>    
+</div>
+
+<div ng-show="components.STYLE" class="grid-cell" style="min-width: 46%; padding: 4px">
+    <h3 class="text-warning">Styler <small>Not Implemented Yet</small></h3>
+</div>
+
+<div ng-show="components.MODEL" class="grid-cell" style="min-width: 46%;padding: 4px">
+  <div><textarea ui-codemirror='{ lineNumbers : true, mode : "coffeescript", theme : "earth", matchBrackets : true, lineWrapping : true }' ng-model="doc.model"></textarea></div>
+  <div class="alert alert-error" ng-show="doc.modelError">
+      <small>{{doc.modelError.toString()}}</small>
+  </div> 
+</div>
+
+<div ng-show="components.DEBUG" class="grid-cell code-editor" style="min-width: 46%; padding: 4px">
+  <table class="table table-striped table-condensed">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="key in doc.debugModel">
+            <td><code>{{key.name}}</code></td>
+              <td>{{key.type}}</td>
+              <td>{{key.asString}}</td>
+        </tr>
+    </table>
+</div>    

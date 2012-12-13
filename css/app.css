@@ -1,0 +1,59 @@
+/* app css stylesheet */
+
+.grid {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 700px;
+    border: 2px solid #0480be;
+    padding: 4px;
+}
+      
+.grid-cell {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+/*    width: 64px;
+    height: 64px; */
+    margin: 4px;
+}
+
+
+
+.code-editor, .mono-font {
+    font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.CodeMirror {                    
+    font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+    font-size: 13px;
+    line-height: 15px;
+    border: 1px solid #d9edf7;  
+}
+      
+.CodeMirror-scroll {
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: auto;
+      }
+
+.toolbox-right {
+    
+    position: fixed;
+    top : 50px;
+    right: 0px;
+    
+}
+
+.toolbox-right.btn-group-vertical > .btn:first-child {
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    border-top-right-radius: 0;
+}
+
+.toolbox-right.btn-group-vertical > .btn:last-child {
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+}

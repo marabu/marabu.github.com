@@ -1,0 +1,40 @@
+
+<div class="well well-small" style="width: 225px; margin-left: auto; margin-right: auto">
+<h1><img src="img/github-logo.png" width="100px" height="100px"></img><span class="text-info">GitHub</h1></span></h1>
+
+<!-- not logged in -->
+<div ng-hide="Accounts.active.GitHub.user">
+    <form><fieldset>
+      <input class="input-large" type="text" ng-model="logins.github.username" placeholder="Username"><br/>
+      <input class="input-large" type="password" ng-model="logins.github.password" placeholder="Password"><br/>
+      <label class="checkbox" for="remember">Remember me<input id="remember" type="checkbox" ng-model="logins.github.remember"></input></label>
+      <button class="btn pull-right" ng-click="login(logins.github)">Log In</button>
+    </fieldset></form>
+</div>
+
+<!-- logged in -->
+<div ng-show="Accounts.active.GitHub.user">
+      <form><fieldset>
+      Logged in as:<b> {{Accounts.active.GitHub.user.login}}</b><br/>
+      <button class="btn btn-warning pull-right" ng-click="logout(logins.github)">Log Out</button><br/><br/><br/>      
+      <center>    
+      <button class="btn btn-info btn-large" ng-click="createRoot(logins.github)">Create Home Gist</button><br/><br/>
+      <button class="btn btn-info btn-large" ng-click="findHome()">Find Home Gist</button>
+      </center>
+      </fieldset></form>
+ </div>
+</div>
+    
+    <!-- Accounts : {{Accounts.active.github.user|json}} -->
+    
+
+    <!-- table>
+        
+        <tr ng-repeat="(k,v) in MRB.storage">
+            <td><b>{{k}}</b></td>
+            <td>{{v|json:false}}</td>
+        </tr>
+    </table -->
+    
+    <!-- div class="well well-small" ng-repeat="gist in gsts"><pre>{{gist|json}}<pre></div-->
+</div>
