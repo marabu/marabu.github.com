@@ -60,90 +60,90 @@ angular.module('marabu.directives', []).
         }
      };
   }).
-  directive('canvas', function($compile) {
-      
-    return {
-        template : "<div></div>",
-        replace: true,
-        // transclude: true,
-        restrict: 'E',
-        require : "ngModel",
-        //scope: {},
-//        controller : function($scope, $attr) {
-//            alert( "Creating Controller " + $scope.$id);
-//        },
-        compile: function compile(tElement, tAttrs, transclude) {
-            alert( "Compiling " + tElement[0] );
-                    
-            var stage = new Kinetic.Stage({
-                container: tElement[0],
-                width: tAttrs.width || 150,
-                height: tAttrs.height || 100
-            });
-            
-            var layer = new Kinetic.Layer();            
-            var layer2 = new Kinetic.Layer();
-
-            var rect = new Kinetic.Rect({
-                x: 0,
-                y: 0,
-                width: 10,
-                height: 10,
-                fill: 'green',
-                stroke: 'black',
-                strokeWidth: 1
-            });
-            
-            var rect2 = new Kinetic.Rect({
-                x: 50,
-                y: 50,
-                width: 10,
-                height: 10,
-                fill: 'red',
-                stroke: 'blue',
-                strokeWidth: 1
-            });
-                        
-            layer.add(rect);
-            layer2.add(rect2);
-            //stage.add(layer);
-            // stage.draw();
-            
-            return {
-                pre : function(scope, element, attrs, ngModel) {
-                    alert( "Canvas Pre Link" + attrs.ngModel);
-                },
-                post : function(scope, element, attrs, ngModel) {
-                                  
-                  stage.add(layer);
-                  stage.add(layer2);
-                  
-//                  var le = angular.element( stage.getDOM() );
-//                  
-//                  le.css( "width", "100%" );
-//                  
-//                  le = angular.element( layer.getCanvas().getElement() );
+//  directive('canvas', function($compile) {
+//      
+//    return {
+//        template : "<div></div>",
+//        replace: true,
+//        // transclude: true,
+//        restrict: 'E',
+//        require : "ngModel",
+//        //scope: {},
+////        controller : function($scope, $attr) {
+////            alert( "Creating Controller " + $scope.$id);
+////        },
+//        compile: function compile(tElement, tAttrs, transclude) {
+//            alert( "Compiling " + tElement[0] );
+//                    
+//            var stage = new Kinetic.Stage({
+//                container: tElement[0],
+//                width: tAttrs.width || 150,
+//                height: tAttrs.height || 100
+//            });
 //            
-//                  le.css( "width", "100%" );
-
-            
-                  alert( "Canvas Post Link");  
-            
-                  // used to update the UI
-                  var updateCanvas = function( newValue, oldValue ) {
-                      rect.setX( newValue );
-                      stage.draw();
-                      alert( "Updating canvas" + newValue);
-                  };
-                  
-                  scope.$watch( attrs.ngModel, updateCanvas );
-                  
-                  updateCanvas(); // First update
-                }
-            };    
-        }
-     };
-  }).        
+//            var layer = new Kinetic.Layer();            
+//            var layer2 = new Kinetic.Layer();
+//
+//            var rect = new Kinetic.Rect({
+//                x: 0,
+//                y: 0,
+//                width: 10,
+//                height: 10,
+//                fill: 'green',
+//                stroke: 'black',
+//                strokeWidth: 1
+//            });
+//            
+//            var rect2 = new Kinetic.Rect({
+//                x: 50,
+//                y: 50,
+//                width: 10,
+//                height: 10,
+//                fill: 'red',
+//                stroke: 'blue',
+//                strokeWidth: 1
+//            });
+//                        
+//            layer.add(rect);
+//            layer2.add(rect2);
+//            //stage.add(layer);
+//            // stage.draw();
+//            
+//            return {
+//                pre : function(scope, element, attrs, ngModel) {
+//                    alert( "Canvas Pre Link" + attrs.ngModel);
+//                },
+//                post : function(scope, element, attrs, ngModel) {
+//                                  
+//                  stage.add(layer);
+//                  stage.add(layer2);
+//                  
+////                  var le = angular.element( stage.getDOM() );
+////                  
+////                  le.css( "width", "100%" );
+////                  
+////                  le = angular.element( layer.getCanvas().getElement() );
+////            
+////                  le.css( "width", "100%" );
+//
+//            
+//                  alert( "Canvas Post Link");  
+//            
+//                  // used to update the UI
+//                  var updateCanvas = function( newValue, oldValue ) {
+//                      rect.setX( newValue );
+//                      stage.draw();
+//                      alert( "Updating canvas" + newValue);
+//                  };
+//                  
+//                  scope.$watch( attrs.ngModel, updateCanvas );
+//                  
+//                  updateCanvas(); // First update
+//                }
+//            };    
+//        }
+//     };
+//  }).        
   // directive('uiCodemirror', ['ui.config', '$parse', function (uiConfig, $parse) {
   directive('uiCodemirror', [ '$parse', function ($parse) {
     'use strict';

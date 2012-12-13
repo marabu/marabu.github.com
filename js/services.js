@@ -27,7 +27,7 @@ angular.module('marabu.services', []).
 
         return storage;
     }]).
-    factory('Documents', ["Storage", "Accounts",  function(Storage, Accounts) {
+    factory('Documents', ["$http",  "Storage", "Accounts",  function($http, Storage, Accounts) {
         // Document storage
         var storage = Storage;
         var DOCS_KEY = ".marabu.documents";  // Should be in home
@@ -39,6 +39,12 @@ angular.module('marabu.services', []).
 
         var save = function() {
             storage.put(DOCS_KEY, docs.entries);
+        };
+        
+        var store = function( document ) {
+            docs.entries[document.metadata.name] = { store : "Local", path: document.metadata.name };
+            save();            
+            document.save();
         };
 
         docs.add = function(name) {
@@ -63,6 +69,22 @@ angular.module('marabu.services', []).
             nd.save();
             return nd;
         };
+        
+        
+        docs.load = function(gist) {
+            
+            var gitHub = new marabu.GitHub( $http );
+            var _docs = this;
+            
+            gitHub.gist( gist ).success(
+                function( data ) {
+                    var nd = new _docs.Document( marabu.Json.from( data.files["document.json"].content ) );
+                    store( nd );                    
+                }
+            ).error( function() { alert( "Could not load gsit : " + gist + "." ); } );            
+            
+        };
+        
 
         docs.del = function(name) {
             var entry = this.entries[name];
@@ -140,7 +162,7 @@ angular.module('marabu.services', []).
                    this.debugModel.push( { 
                        name : key, 
                        type : val ? val.constructor.name : "-", //.constructor.name, 
-                       value : val ? val : "undefined",                    
+                       value : val ? val : "undefined",
                        asString : val ? val.toString() : "undefined" 
                    } );
                 }

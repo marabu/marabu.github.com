@@ -12,10 +12,16 @@ function HomeCtrl( $scope, Documents  ) {
     $scope.docs = Documents;
     
     $scope.newName = "";
+    $scope.newGist = "";
     
     $scope.add = function() {
         $scope.docs.add( $scope.newName );
         $scope.newName = "";
+    };
+    
+    $scope.load = function() {
+        $scope.docs.load( $scope.newGist );
+        $scope.newGist = "";
     };
       
 }
