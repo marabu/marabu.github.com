@@ -43,7 +43,7 @@
         function ViewerCtrl( $scope, $location, $http, Documents ) {    
             var gitHub = new marabu.GitHub( $http );
             $scope.p = $location.path().substring(1);
-            $scope.doc = gitHub.gist( $scope.p || "6698fe6595a59dca96e0" ).then(
+            $scope.doc = gitHub.gist( $scope.p || "21dea07421fb425eea21" ).then(
                 function( data ) {
                     return new Documents.Document( marabu.Json.from( data.data.files["document.json"].content ) );
                 }
