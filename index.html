@@ -1,0 +1,55 @@
+<!doctype html>
+
+<!-- Plain Marabu viewer.  
+     
+     As many libraries as possible are loaded form remote places.
+
+-->
+
+<html lang="en" ng-app="marabu" ng-controller="ViewerCtrl">
+<head>
+  <meta charset="utf-8">
+  <!-- meta name="fragment" content="!"/--> <!-- Allow crowling of the app -->
+  <title>Marabu [&delta;]</title> <!-- XXX this needs to be configured in the document -->
+  <link rel="shortcut icon" href="img/marabu.ico"/> <!-- XXX this needs to be configured in the document -->
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+ 
+</head>
+<body>
+  
+    <div class="container-fluid">
+        <marabu-doc-view document="doc"></marabu-doc-view>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+    <script src="http://kineticjs.com/download/v4.1.2/kinetic-v4.1.2.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.3/coffee-script.min.js"></script>
+
+    <script src="js/marabu-lib.js"></script>  
+
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/filters.js"></script>
+    
+    <script lang="text/javascript">
+        // Initialize the module
+        angular.module('marabu', ['marabu.filters', 'marabu.services', 'marabu.directives']);
+        
+        // The main and only controller needed for the viewer.
+        // XXX Change to some decent marabu home
+        // Solve somehow storing anf loading of documents probably using hafs
+        function ViewerCtrl( $scope, $location, $http, Documents ) {    
+            var gitHub = new marabu.GitHub( $http );
+            $scope.p = $location.path().substring(1);
+            $scope.doc = gitHub.gist( $scope.p || "21dea07421fb425eea21" ).then(
+                function( data ) {
+                    return new Documents.Document( marabu.Json.from( data.data.files["document.json"].content ) );
+                }
+            );            
+        }
+    </script>
+  
+</body>
+</html>
